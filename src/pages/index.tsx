@@ -48,12 +48,14 @@ export default function Home() {
   }
 
   async function yes() {
+    setLoading(true)
     const response = await axios.post(`/api/email`, { message: 'Giovanna aceitou ser sua namorada ❤❤' })
     console.log(response)
     if (response) router.push('/success')
   }
 
   async function no() {
+    setLoading(true)
     const response = await axios.post(`/api/email`, { message: 'Giovanna recusou o seu pedido de namoro 😞😞' })
     console.log(response)
     if (response) router.push('/failure')
