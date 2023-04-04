@@ -21,16 +21,15 @@ export default function handler(
     })
 
     try {
-        if (process.env.email) {
-            client.send({
-                text: message,
-                from: process.env.mail ?? '',
-                to: 'isaac.mcustodio@gmail.com',
-                subject: 'Resposta do seu pedido de namoro',
-            }, (callback) => console.log("email sent", callback))    
-        }
+        client.send({
+            text: message,
+            from: process.env.mail ?? '',
+            to: 'isaac.mcustodio@gmail.com',
+            subject: 'Resposta do seu pedido de namoro',
+        }, (callback) => console.log("email sent", callback))
     } catch (e) {
         res.status(400).end(JSON.stringify({ message: "Error" }))
         return;
     }
+    res.status(200).end(JSON.stringify({ message: 'Send Mail' }))
 }
