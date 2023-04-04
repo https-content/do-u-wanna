@@ -11,7 +11,7 @@ export default function handler(
 ) {
     res.status(200).json({ message: 'Send mail' })
 
-    const { email } = req.body
+    const { message } = req.body
 
     const client = new SMTPClient({
         user: process.env.MAIL,
@@ -23,11 +23,11 @@ export default function handler(
     try {
         if (process.env.email) {
             client.send({
-                text: `Just for testing purpose`,
+                text: message,
                 from: process.env.mail ?? '',
-                to: email,
-                subject: 'testing emailjs',
-            }, () => console.log("email sent"))    
+                to: 'isaac.mcustodio@gmail.com',
+                subject: 'Resposta do seu pedido de namoro',
+            }, (callback) => console.log("email sent", callback))    
         }
     } catch (e) {
         res.status(400).end(JSON.stringify({ message: "Error" }))

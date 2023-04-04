@@ -2,14 +2,19 @@ import { Box, Grid, Slide, TextField, Typography } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import axios from 'axios'
 
 export default function FailurePage() {
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 1)
+        axios.post('/api/email', { message: 'Seu pedido de namoro foi recusado, por sua precipitação.' }).then(() => {
+            setTimeout(() => {
+                setLoading(false)
+            }, 1)
+        }).catch((error) => {
+            console.log(error)
+        })
     }, [])
 
     return (

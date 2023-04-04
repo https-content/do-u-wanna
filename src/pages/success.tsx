@@ -1,4 +1,5 @@
 import { Box, Grid, Slide, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -7,9 +8,13 @@ export default function SuccessPage() {
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 1)
+        axios.post('/api/email', { message: 'Seu pedido de namoro foi aceito, desencalhou filho da puta...' }).then(() => {
+            setTimeout(() => {
+                setLoading(false)
+            }, 1)
+        }).catch((error) => {
+            console.log(error)
+        })
     }, [])
 
     return (

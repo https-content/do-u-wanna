@@ -46,7 +46,7 @@ export default function Home() {
   useEffect(() => {
     if (mode == 'SUCCESS') router.push('/success')
     if (mode == 'FAILURE') router.push('/failure')
-  }, [mode])
+  }, [mode, router])
 
   function findPhraseByOrder(order: number) {
     return myphrases.find((phrase) => Number(phrase.order) == order)
