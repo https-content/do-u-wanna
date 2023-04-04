@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SMTPClient } from 'emailjs'
 
+import { config } from "../../../config"
+
 type Data = {
     message: string
 }
@@ -14,16 +16,16 @@ export default function handler(
     const { message } = req.body
 
     const client = new SMTPClient({
-        user: process.env.MAIL,
-        password: process.env.PASSWORD,
+        user: config.mail,
+        password: config.password,
         host: 'smtp.gmail.com',
         ssl: true
-    })
+    },)
 
     try {
         client.send({
             text: message,
-            from: process.env.mail ?? '',
+            from: config.mail,
             to: 'isaac.mcustodio@gmail.com',
             subject: 'Resposta do seu pedido de namoro',
         }, (callback) => console.log("email sent", callback))
