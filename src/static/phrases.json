@@ -1,0 +1,70 @@
+[
+  {
+    "order": 1,
+    "text": "This is not an usual thing i'm used to do..."
+  },
+  {
+    "order": 2,
+    "text": "This makes me think if I'm doing the right thing..."
+  },
+  {
+    "order": 3,
+    "text": "This makes me think a lot, actually."
+  },
+  {
+    "order": 4,
+    "text": "NOT JOKING, A LOT"
+  },
+  {
+    "order": 5,
+    "text": "I don't know from where did you came"
+  },
+  {
+    "order": 6,
+    "text": "If you were looking for the same thing as I was"
+  },
+  {
+    "order": 7,
+    "text": "But what really matters is..."
+  },
+  {
+    "order": 8,
+    "text": "You made my heart to show some life again..."
+  },
+  {
+    "order": 9,
+    "text": "Your smell made me addict"
+  },
+  {
+    "order": 10,
+    "text": "Your touch, your kindness, your attention, your listening and your eyes made me visible..."
+  },
+  {
+    "order": 11,
+    "text": "I don't know how much time it will last"
+  },
+  {
+    "order": 12,
+    "text": "But I really hope that it could last forever"
+  },
+  {
+    "order": 13,
+    "text": "I don't know what is exactly your conception of eternity, even if there is one, but I hope you to be by my side on it"
+  },
+  {
+    "order": 14,
+    "text": "Hope that we can day after day, improve our confidence and trust, if you allow us to"
+  },
+  {
+    "order": 15,
+    "text": "I want to know everything about you, I want to make you happy, to lay down on your arms and feel your touch, to share, to help, to be there for you whenever you need."
+  },
+  {
+    "order": 16,
+    "text": "So, do you want to be my girlfriend? 💍",
+    "options": [
+      { "id": 1, "title": "Yes" },
+      { "id": 2, "title": "No, I'm sorry" }
+    ]
+  }
+]
