@@ -8,13 +8,7 @@ export default function SuccessPage() {
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.post('/api/email', { message: 'Seu pedido de namoro foi aceito, desencalhou filho da puta...' }).then(() => {
-            setTimeout(() => {
-                setLoading(false)
-            }, 1)
-        }).catch((error) => {
-            console.log(error)
-        })
+        
     }, [])
 
     return (
