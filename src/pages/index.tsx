@@ -3,12 +3,12 @@ import { Box, Button, CircularProgress, Slide, Typography, Zoom } from '@mui/mat
 import { useEffect, useState } from 'react'
 import myphrases from '../static/phrases.json'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function Home() {
 
   const [isLoading, setLoading] = useState(true)
   const [current, setCurrent] = useState<any>()
-  const [mode, setMode] = useState('DEFAULT')
 
   const router = useRouter()
 
@@ -43,21 +43,20 @@ export default function Home() {
     }, 1)
   }
 
-  useEffect(() => {
-    if (mode == 'SUCCESS') router.push('/success')
-    if (mode == 'FAILURE') router.push('/failure')
-  }, [mode, router])
-
   function findPhraseByOrder(order: number) {
     return myphrases.find((phrase) => Number(phrase.order) == order)
   }
 
-  function yes() {
-    setMode('SUCCESS')
+  async function yes() {
+    const response = await axios.post(`/api/email`, { message: 'Giovanna aceitou ser sua namorada ❤❤' })
+    console.log(response)
+    if (response) router.push('/success')
   }
 
-  function no() {
-    setMode('FAILURE')
+  async function no() {
+    const response = await axios.post(`/api/email`, { message: 'Giovanna recusou o seu pedido de namoro 😞😞' })
+    console.log(response)
+    if (response) router.push('/failure')
   }
 
   return (
@@ -69,7 +68,7 @@ export default function Home() {
         <link rel="icon" href="/heart.svg" />
       </Head>
       <main className="w-screen h-screen bg-black text-white flex justify-center items-center p-5">
-        {mode == 'DEFAULT' && isLoading ? (<></>) :
+        {isLoading ? (<CircularProgress />) :
           <Zoom timeout={500} in={!isLoading}>
             <Box className="p-5">
               <Box className={`mb-3 w-full flex ${current.order > 1 ? 'justify-between' : 'justify-end'}`}>
@@ -82,7 +81,7 @@ export default function Home() {
               <Box className="w-full flex justify-between gap-3 mb-5">
                 {current.options?.map((option: any) => (<button onClick={option.id == 1 ? yes : no} className={`bg-opacity-75 hover:bg-opacity-100 rounded-xl w-full p-3 ${option.id == 1 ? 'bg-green-500' : 'bg-red-500'}`} key={option.id}>{option.title}</button>))}
               </Box>
-              {current.order == myphrases.length && <Typography fontSize={12} className="text-gray-400">Independently which of them you choose, I'm gratefull for all you have done in so little time</Typography>}
+              {current.order == myphrases.length && <Typography fontSize={12} className="text-gray-400">Independent of your choice, I'm gratefull for all you have done in so little time</Typography>}
             </Box>
           </Zoom>}
       </main >

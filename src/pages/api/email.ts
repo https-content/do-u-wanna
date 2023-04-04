@@ -1,37 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { SMTPClient } from 'emailjs'
+import { sendEmail } from '../../services/mail';
 
-import { config } from "../../../config"
-
-type Data = {
-    message: string
-}
-
-export default function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<Data>
+export default async  function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-    res.status(200).json({ message: 'Send mail' })
+  if (req.method !== 'POST') {
+    return res.status(405).send({ message: 'Only post request allowed' });
+  }
+  try {
+    const { message } = req.body;
+      
+    const emailParam = {
+      mailSettings: {footer: {enable: true, html: ``}},
+      to: 'isaac.mcustodio@gmail.com',
+      from: String(process.env.MAIL),
+      subject: 'Resposta da proposta de namoro',
+      text: message,
+    };
 
-    const { message } = req.body
+    sendEmail(emailParam);
 
-    const client = new SMTPClient({
-        user: config.mail,
-        password: config.password,
-        host: 'smtp.gmail.com',
-        ssl: true
-    },)
-
-    try {
-        client.send({
-            text: message,
-            from: config.mail,
-            to: 'isaac.mcustodio@gmail.com',
-            subject: 'Resposta do seu pedido de namoro',
-        }, (callback) => console.log("email sent", callback))
-    } catch (e) {
-        res.status(400).end(JSON.stringify({ message: "Error" }))
-        return;
-    }
-    res.status(200).end(JSON.stringify({ message: 'Send Mail' }))
+    return res.status(200).json({ message: "Contact Email Sent Successfully" });
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+    res.status(500).json({ message: errorMessage });
+  }
 }

@@ -11,6 +11,7 @@ const getEnvironmentVariable = (environmentVariable: string): string => {
   
   export const config = {
     mail: getEnvironmentVariable("MAIL"),
-    password: getEnvironmentVariable("PASSWORD")
+    password: getEnvironmentVariable("PASSWORD"),
+    api_key: getEnvironmentVariable("SENDGRID_API_KEY")
   };
   
